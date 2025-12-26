@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import Icon from "@/components/ui/icon";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const masters = [
   {
@@ -56,6 +56,28 @@ const schedule = [
 
 export default function Index() {
   const [bookingOpen, setBookingOpen] = useState(false);
+  const mapRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && (window as any).ymaps && mapRef.current) {
+      (window as any).ymaps.ready(() => {
+        const map = new (window as any).ymaps.Map(mapRef.current, {
+          center: [55.7558, 37.6173],
+          zoom: 15,
+          controls: ['zoomControl', 'fullscreenControl']
+        });
+
+        const placemark = new (window as any).ymaps.Placemark([55.7558, 37.6173], {
+          balloonContent: '<strong>ГлинLab</strong><br/>г. Москва, ул. Гончарная, д. 15',
+          hintContent: 'Гончарная мастерская ГлинLab'
+        }, {
+          preset: 'islands#brownCircleDotIcon'
+        });
+
+        map.geoObjects.add(placemark);
+      });
+    }
+  }, []);
 
   return (
     <div className="min-h-screen">
@@ -273,32 +295,58 @@ export default function Index() {
       </section>
 
       <section id="contacts" className="py-20 px-4">
-        <div className="container mx-auto max-w-2xl text-center">
-          <h2 className="text-4xl font-bold mb-8">Контакты</h2>
-          <div className="space-y-4 text-lg">
-            <p className="flex items-center justify-center gap-2">
-              <Icon name="MapPin" className="text-primary" size={24} />
-              г. Москва, ул. Гончарная, д. 15
-            </p>
-            <p className="flex items-center justify-center gap-2">
-              <Icon name="Phone" className="text-primary" size={24} />
-              +7 (495) 123-45-67
-            </p>
-            <p className="flex items-center justify-center gap-2">
-              <Icon name="Mail" className="text-primary" size={24} />
-              info@glinlab.ru
-            </p>
-          </div>
-          <div className="flex justify-center gap-4 mt-8">
-            <Button variant="outline" size="icon">
-              <Icon name="Instagram" size={20} />
-            </Button>
-            <Button variant="outline" size="icon">
-              <Icon name="Facebook" size={20} />
-            </Button>
-            <Button variant="outline" size="icon">
-              <Icon name="MessageCircle" size={20} />
-            </Button>
+        <div className="container mx-auto max-w-5xl">
+          <h2 className="text-4xl font-bold text-center mb-12">Контакты</h2>
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="space-y-6">
+              <Card>
+                <CardContent className="pt-6">
+                  <div className="space-y-4 text-lg">
+                    <p className="flex items-start gap-3">
+                      <Icon name="MapPin" className="text-primary mt-1 flex-shrink-0" size={24} />
+                      <span>г. Москва, ул. Гончарная, д. 15</span>
+                    </p>
+                    <p className="flex items-center gap-3">
+                      <Icon name="Phone" className="text-primary flex-shrink-0" size={24} />
+                      <a href="tel:+74951234567" className="hover:text-primary transition-colors">+7 (495) 123-45-67</a>
+                    </p>
+                    <p className="flex items-center gap-3">
+                      <Icon name="Mail" className="text-primary flex-shrink-0" size={24} />
+                      <a href="mailto:info@glinlab.ru" className="hover:text-primary transition-colors">info@glinlab.ru</a>
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardContent className="pt-6">
+                  <h3 className="font-semibold text-lg mb-4">Часы работы</h3>
+                  <div className="space-y-2 text-muted-foreground">
+                    <p className="flex justify-between">
+                      <span>Пн-Пт:</span>
+                      <span>10:00 - 21:00</span>
+                    </p>
+                    <p className="flex justify-between">
+                      <span>Сб-Вс:</span>
+                      <span>11:00 - 19:00</span>
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
+              <div className="flex gap-4">
+                <Button variant="outline" size="icon" className="hover-scale">
+                  <Icon name="Instagram" size={20} />
+                </Button>
+                <Button variant="outline" size="icon" className="hover-scale">
+                  <Icon name="Facebook" size={20} />
+                </Button>
+                <Button variant="outline" size="icon" className="hover-scale">
+                  <Icon name="MessageCircle" size={20} />
+                </Button>
+              </div>
+            </div>
+            <div className="h-[400px] md:h-full min-h-[300px] rounded-lg overflow-hidden shadow-lg animate-fade-in">
+              <div ref={mapRef} className="w-full h-full"></div>
+            </div>
           </div>
         </div>
       </section>
