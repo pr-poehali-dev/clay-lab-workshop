@@ -83,9 +83,17 @@ export default function Index() {
     <div className="min-h-screen">
       <nav className="fixed top-0 w-full bg-background/95 backdrop-blur-sm z-50 border-b">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <h1 className="text-2xl font-bold text-primary">ГлинLab</h1>
+          <div className="flex items-center gap-3">
+            <img 
+              src="https://cdn.poehali.dev/projects/276a28b1-a7c6-43d5-8167-72006a1cbf30/files/cfe70793-a9c9-40b3-b03e-035c28791e58.jpg" 
+              alt="ГлинLab" 
+              className="w-10 h-10 object-contain"
+            />
+            <h1 className="text-2xl font-bold text-primary">ГлинLab</h1>
+          </div>
           <div className="flex gap-6">
             <a href="#services" className="hover:text-primary transition-colors">Услуги</a>
+            <a href="#gallery" className="hover:text-accent transition-colors">Галерея</a>
             <a href="#masters" className="hover:text-primary transition-colors">Мастера</a>
             <a href="#materials" className="hover:text-primary transition-colors">Материалы</a>
             <a href="#schedule" className="hover:text-primary transition-colors">Расписание</a>
@@ -115,16 +123,60 @@ export default function Index() {
         </div>
       </section>
 
+      <section id="gallery" className="py-20 px-4 bg-accent/5">
+        <div className="container mx-auto">
+          <h2 className="text-4xl font-bold text-center mb-4">Наши работы</h2>
+          <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
+            Каждое изделие уникально и создано вручную нашими мастерами и учениками
+          </p>
+          <div className="grid md:grid-cols-3 gap-8 mb-8">
+            <Card className="overflow-hidden hover:shadow-xl transition-shadow animate-scale-in group">
+              <div className="relative overflow-hidden">
+                <img 
+                  src="https://cdn.poehali.dev/projects/276a28b1-a7c6-43d5-8167-72006a1cbf30/files/5a7965e8-5e90-41c7-8f80-21329280f26d.jpg" 
+                  alt="Керамическая чаша" 
+                  className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
+                />
+                <Badge className="absolute top-4 right-4 bg-accent">Новинка</Badge>
+              </div>
+              <CardContent className="pt-4">
+                <h3 className="font-semibold text-lg mb-2">Чаша с зеленой глазурью</h3>
+                <p className="text-muted-foreground text-sm">Ручная работа, натуральные материалы</p>
+              </CardContent>
+            </Card>
+            <Card className="overflow-hidden hover:shadow-xl transition-shadow animate-scale-in group">
+              <div className="relative overflow-hidden">
+                <img 
+                  src="https://cdn.poehali.dev/projects/276a28b1-a7c6-43d5-8167-72006a1cbf30/files/26f049cc-98be-4f04-9cc9-f0f0fd89bf06.jpg" 
+                  alt="Керамические кружки" 
+                  className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
+                />
+              </div>
+              <CardContent className="pt-4">
+                <h3 className="font-semibold text-lg mb-2">Набор керамических кружек</h3>
+                <p className="text-muted-foreground text-sm">Авторская коллекция, земляные оттенки</p>
+              </CardContent>
+            </Card>
+            <Card className="overflow-hidden hover:shadow-xl transition-shadow animate-scale-in group">
+              <div className="relative overflow-hidden">
+                <img 
+                  src="https://cdn.poehali.dev/projects/276a28b1-a7c6-43d5-8167-72006a1cbf30/files/6190b825-7f65-44c6-88a4-9d343390c56b.jpg" 
+                  alt="Керамическая ваза" 
+                  className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
+                />
+              </div>
+              <CardContent className="pt-4">
+                <h3 className="font-semibold text-lg mb-2">Минималистичная ваза</h3>
+                <p className="text-muted-foreground text-sm">Современный дизайн, ручное глазурование</p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
       <section id="services" className="py-20 px-4">
         <div className="container mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-4">Наши услуги</h2>
-          <div className="flex justify-center mb-12">
-            <img 
-              src="https://cdn.poehali.dev/projects/276a28b1-a7c6-43d5-8167-72006a1cbf30/files/bfebf273-2a72-438c-9d72-b2ccc906e849.jpg" 
-              alt="Pottery process" 
-              className="w-48 h-48 object-cover rounded-full shadow-lg"
-            />
-          </div>
+          <h2 className="text-4xl font-bold text-center mb-12">Наши услуги</h2>
           <div className="grid md:grid-cols-3 gap-8">
             <Card className="hover:shadow-lg transition-shadow animate-scale-in">
               <CardHeader>
